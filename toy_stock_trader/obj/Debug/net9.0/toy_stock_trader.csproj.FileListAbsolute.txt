@@ -1,0 +1,14 @@
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\bin\Debug\net9.0\toy_stock_trader.exe
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\bin\Debug\net9.0\toy_stock_trader.deps.json
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\bin\Debug\net9.0\toy_stock_trader.runtimeconfig.json
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\bin\Debug\net9.0\toy_stock_trader.dll
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\bin\Debug\net9.0\toy_stock_trader.pdb
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.AssemblyInfoInputs.cache
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.AssemblyInfo.cs
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.csproj.CoreCompileInputs.cache
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.dll
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\refint\toy_stock_trader.dll
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.pdb
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.genruntimeconfig.cache
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\ref\toy_stock_trader.dll
