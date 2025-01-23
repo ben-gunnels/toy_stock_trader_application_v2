@@ -1,27 +1,25 @@
+using System;
+using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
-class API {
-    private HttpClient client = new HttpClient();
+public class API
+{
+    private string SecretKey = Environment.GetEnvironmentVariable("RapidApiKey");
 
-    private HttpRequestMessage FormatRequest(string symbol) {
-        return new HttpRequestMessage {
-        Method = HttpMethod.Get,
-        RequestUri = new Uri($"https://real-time-finance-data.p.rapidapi.com/stock-quote?symbol={symbol}&language=en"),
-        Headers =
+    public async Task<string> MakeRequest(string symbol) {
+        Console.WriteLine($"Rapid Key: {SecretKey}");
+        var client = new HttpClient();
+        var request = new HttpRequestMessage
         {
-            { "x-rapidapi-key", "7192e629f7mshab104f66a8cb883p1828ffjsncb88409168d4" },
-            { "x-rapidapi-host", "real-time-finance-data.p.rapidapi.com" },
-        },
-    };
-    }
-
-    async public Task<string> MakeRequest(string symbol) {
-        /*  
-            Params: symbol = desired stock symbol to purchase or sell
-            Returns: body = json object of stock data queried
-        
-        */
-        HttpRequestMessage request = FormatRequest(symbol);
+            Method = HttpMethod.Get,
+            RequestUri = new Uri($"https://real-time-finance-data.p.rapidapi.com/stock-quote?symbol={symbol}&language=en"),
+            Headers =
+            {
+                { "x-rapidapi-key", SecretKey },
+                { "x-rapidapi-host", "real-time-finance-data.p.rapidapi.com" },
+            },
+        };
         using (var response = await client.SendAsync(request))
         {
             response.EnsureSuccessStatusCode();

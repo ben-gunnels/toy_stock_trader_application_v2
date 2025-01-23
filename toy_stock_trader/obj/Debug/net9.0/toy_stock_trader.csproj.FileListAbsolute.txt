@@ -12,3 +12,4 @@ c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj
 c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.pdb
 c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.genruntimeconfig.cache
 c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\ref\toy_stock_trader.dll
+c:\Users\bengu\OneDrive\Documents\research\toy_stock_trader\toy_stock_trader\obj\Debug\net9.0\toy_stock_trader.sourcelink.json

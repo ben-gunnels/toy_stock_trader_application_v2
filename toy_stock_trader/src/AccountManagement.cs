@@ -13,7 +13,7 @@ class AccountManagement {
 
         ++this.AccountCounter;
 
-        Console.WriteLine($"Success new account created! Welcome {newAccount.Name}");
+        Console.WriteLine($"Success! New account created! Welcome {newAccount.Name}\n");
         return newAccount;
     }
 

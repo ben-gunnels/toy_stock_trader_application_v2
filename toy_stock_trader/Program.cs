@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
-class Program {
+partial class Program {
     static Account CreateAccount(AccountManagement management) {
         bool running = true;
         string name = "UserX";
@@ -9,16 +9,17 @@ class Program {
         string repeatedPassword;
         string fundInput;
         float funds = 0f;
+        Account account;
 
         while (running) {
             
-            Console.WriteLine("Please give your account a name\n");
+            Console.WriteLine("Please give your account a name: ");
             name = Console.ReadLine();
 
             while (true) {
-                Console.WriteLine("Please give your account a password\n");
+                Console.WriteLine("Please give your account a password: ");
                 password = Console.ReadLine();
-                Console.WriteLine("Please confirm your password by typing it again\n");
+                Console.WriteLine("Please confirm your password by typing it again: ");
                 repeatedPassword = Console.ReadLine();
                 if (password == repeatedPassword) {
                     Console.WriteLine("Password input accepted!\n");
@@ -29,11 +30,11 @@ class Program {
             }
 
             while (true) {
-                Console.WriteLine("Please add funds to your account or input 0 to bypass\n");
+                Console.WriteLine("Please add funds to your account or input 0 to bypass: ");
                 fundInput = Console.ReadLine();
                 if (float.Parse(fundInput) >= 0) {
                     funds = float.Parse(fundInput);
-                    Console.WriteLine("Funds successfully added to your account");
+                    Console.WriteLine("Funds successfully added to your account!\n");
                     break;
                 } else {
                     Console.WriteLine("Please enter a value >= 0 to your account.\n");
@@ -41,7 +42,9 @@ class Program {
             }
             running = false;
         }
-        return management.CreateAccount(name, funds, password);
+        account = management.CreateAccount(name, funds, password);
+        account.UnlockAccount(password); // Return the account unlocked
+        return account;
     }
 
     static Account AccessAccount(AccountManagement management) {
@@ -70,7 +73,7 @@ class Program {
         return null;
     }
 
-    static void AccountFeatures(Account account) {
+    async static void AccountFeatures(Account account) {
         bool running = true;
         string selectedFeature;
         string fundInput;
@@ -110,7 +113,7 @@ class Program {
                     break;
                 case "3":
                     while (true) {
-                        Console.WriteLine("Please enter the symbol of the stock you would like to purchase followed by the number of desired shares (<= 1000) /n");
+                        Console.WriteLine("Please enter the symbol of the stock you would like to purchase followed by the number of desired shares (<= 1000): ");
                         while (true) {
                             symbol = Console.ReadLine();
                             shares = Console.ReadLine();
@@ -124,7 +127,7 @@ class Program {
                         Console.WriteLine($"Searching for symbol {symbol} and will attempt to purchase {shares} shares. Confirm? (1 - Yes, 2 - No)");
                         confirm = Console.ReadLine();
                         if (confirm == "1") {
-                            account.PurchaseStock(symbol, int.Parse(shares));
+                            string responseCode = await account.PurchaseStock(symbol, int.Parse(shares));
                         } else {
                             Console.WriteLine("Transaction will not process. Returning to main menu.");
                         }
@@ -133,7 +136,7 @@ class Program {
                     break;
                 case "4":
                     while (true) {
-                        Console.WriteLine("Please enter the symbol of the stock you would like to sell followed by the number of desired shares (<= 1000) /n");
+                        Console.WriteLine("Please enter the symbol of the stock you would like to sell followed by the number of desired shares (<= 1000): ");
                         while (true) {
                             symbol = Console.ReadLine();
                             shares = Console.ReadLine();
@@ -159,7 +162,7 @@ class Program {
                     break;
                 case "6":
                     while (true) {
-                        Console.WriteLine("Confirm that you would like to exit your account (1 - Confirm, 2 - Reject)\n");
+                        Console.WriteLine("Confirm that you would like to exit your account (1 - Confirm, 2 - Reject) ");
                         confirm = Console.ReadLine();
                         if (confirm == "1") {
                             Console.WriteLine("Safely exiting and locking account\n");
@@ -181,7 +184,9 @@ class Program {
     
 
     static void Main(string[] args) {
-        DataManager.DataManager manager = new DataManager.DataManager();
+        API api = new API();
+        Cache.Cache cache = new Cache.Cache();
+        DataManager.DataManager manager = new DataManager.DataManager(api, cache);
         AccountManagement accountManagement = new AccountManagement(manager);
         bool running = true;
         Account account = null;

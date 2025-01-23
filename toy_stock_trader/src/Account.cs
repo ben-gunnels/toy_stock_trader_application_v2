@@ -8,7 +8,7 @@ class Account {
     private bool Lock { get; set; } = true; // Set and unlocked by password
     private string Password { get; set; }
 
-    private Dictionary<string, Stock> portfolio = new Dictionary<string, Stock>();
+    private Dictionary<string, (Stock stock, int shares)> Portfolio = new Dictionary<string, (Stock, int)>();
 
     private DataManager.DataManager Manager;
 
@@ -23,6 +23,10 @@ class Account {
     }
 
     public bool UnlockAccount(string password) {
+        /*
+        Unlocks features such as purchasing and selling stocks for the user.
+        */
+
         if (password != this.Password) 
         { 
             Console.WriteLine("Password must match account\n");
@@ -38,15 +42,33 @@ class Account {
     }
 
 
-    async public void PurchaseStock(string symbol, int quantity) {
-        if (this.Lock) { return; } // Don't allow a purchase until lock has been released by password
+    async public Task<string> PurchaseStock(string symbol, int quantity) {
+        if (this.Lock) { return "err"; } // Don't allow a purchase until lock has been released by password
+        int startingQuantity = 0;
+        Stock stock = await Manager.TakeStockLookup(symbol);
+        if (stock.Name == "NULL") { // Check if the stock lookup was unsuccessful
+            Console.WriteLine($"Stock with ticker symbol {symbol} not available for trade. Please check your query and try again.\n");
+            return "err";
+        }
+        if (stock.Price * quantity > this.Funds) {
+            Console.WriteLine($"Insufficient funds ${this.Funds} to purchase ${stock.Price * quantity} worth of stock. Try again.\n");
+        }
+        // Add the stock and quantity to personal portfolio
+        if (this.Portfolio.ContainsKey(symbol)){
+            startingQuantity = this.Portfolio[symbol].shares;
+        }
+        this.Portfolio[symbol] = (stock, quantity+startingQuantity);
+        this.Funds -= stock.Price * quantity; 
+        Console.WriteLine($"Stock with ticker symbol {symbol} of {quantity} shares purchased successfully!\n");
+        this.CheckFunds();
+        return "success";
     }
 
     public void SellStock(string symbol, int quantity) {
         if (this.Lock) { return; }
-        if (this.portfolio.TryGetValue(symbol, out Stock stock))
+        if (this.Portfolio.TryGetValue(symbol, out var holding))
         {
-
+            
 
         }
     }

@@ -1,6 +1,3 @@
-
-
-
 namespace Cache {
     class Cache { 
         // Caches stock data to avoid extraneous requests
@@ -23,6 +20,10 @@ namespace Cache {
             }
             Console.WriteLine("Stock does not exist in database. Make an API request.\n");
             return null;
+        }
+
+        public void AddStock(string symbol, Stock stock) {
+            this.cache[symbol] = stock;
         }
     }
 }
